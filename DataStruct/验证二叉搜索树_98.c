@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 #define MAXN 0xffff
-#define INF 0x3f3f3f3f
+#define INF 0x7fffffff
 
 typedef long long ll;
 typedef double fl;
@@ -26,15 +26,19 @@ struct TreeNode {
     struct TreeNode* right;
 };
 
-bool isValidBST(struct TreeNode* root) {
+bool ansFun(struct TreeNode* root, ll lower, ll upper) {
     if (root == NULL) {
-        return 0;
+        return true;
     }
-    isValidBST(root->left);
-    if (root->left->val > root->val || root->val < root->right->val) {
+    if (root->val <= lower || root->val >= upper) {
         return false;
     }
-    struct TreeNode* node = newStruct(TreeNode, 1);
+    return ansFun(root->left, lower, root->val) &&
+           ansFun(root->right, root->val, upper);
+}
+
+bool isValidBST(struct TreeNode* root) {
+    return ansFun(root, LONG_MIN, LONG_MAX);
 }
 
 int main(int argc, char* argv[]) {
