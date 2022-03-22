@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_DEPRECATE
+
 #include <ctype.h>
 #include <limits.h>
 #include <math.h>
@@ -20,10 +21,10 @@ typedef double fl;
 
 struct ListNode {
     int val;
-    struct ListNode* next;
+    struct ListNode *next;
 };
 
-bool hasCycle(struct ListNode* head) {
+bool hasCycle(struct ListNode *head) {
     if (head == NULL || head->next == NULL)
         return false;
     struct ListNode *slow = head, *fast = head->next;
@@ -53,6 +54,6 @@ bool hasCycle(struct ListNode* head) {
 //     return false;
 // }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     return 0;
 }
