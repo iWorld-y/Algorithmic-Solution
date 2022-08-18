@@ -62,27 +62,50 @@ struct TreeNode {
  */
 class Solution {
    public:
+    /*
+     * 用类似线索二叉树的思路找前驱结点
+     */
     void flatten(TreeNode* root) {
-        queue<TreeNode*> q;
-        solve(root, q);
-        int len = q.size();
-        TreeNode* pre = q.front();
-        q.pop();
-        for (int i = 0; i < len - 1; i++) {
-            TreeNode* curr = q.front();
-            q.pop();
-            pre->left = NULL;
-            pre->right = curr;
-            pre = curr;
+        TreeNode* curr = root;
+        while (curr != nullptr) {
+            if (curr->left != nullptr) {
+                TreeNode* prev = curr->left;
+                TreeNode* next = prev;
+                while (prev->right != nullptr) {
+                    prev = prev->right;
+                }
+                prev->right = curr->right;
+                curr->left = nullptr;
+                curr->right = next;
+            }
+            curr = curr->right;
         }
     }
-    void solve(TreeNode* root, queue<TreeNode*>& q) {
-        if (root) {
-            q.push(root);
-            solve(root->left, q);
-            solve(root->right, q);
-        }
-    }
+
+    /*
+     * 用队列储存二叉树的先序遍历, 再重建二叉树.
+     */
+    // void flatten(TreeNode* root) {
+    //     queue<TreeNode*> q;
+    //     solve(root, q);
+    //     int len = q.size();
+    //     TreeNode* pre = q.front();
+    //     q.pop();
+    //     for (int i = 0; i < len - 1; i++) {
+    //         TreeNode* curr = q.front();
+    //         q.pop();
+    //         pre->left = NULL;
+    //         pre->right = curr;
+    //         pre = curr;
+    //     }
+    // }
+    // void solve(TreeNode* root, queue<TreeNode*>& q) {
+    //     if (root) {
+    //         q.push(root);
+    //         solve(root->left, q);
+    //         solve(root->right, q);
+    //     }
+    // }
 };
 // @lc code=end
 
