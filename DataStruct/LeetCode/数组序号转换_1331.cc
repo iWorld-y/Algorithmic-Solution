@@ -12,6 +12,7 @@
 #include <set>
 #include <stack>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -28,6 +29,12 @@ typedef double fl;
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a < b ? a : b)
 
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -40,33 +47,30 @@ struct TreeNode {
 
 class Solution {
    public:
-    /*
-     * 低效的二重循环
-     */
-    vector<int> twoSum(vector<int>& nums, int target) {
-        for (int i = 0; i < nums.max_size(); i++) {
-            for (int j = i; j < nums.max_size(); j++) {
-                if (nums[i] + nums[j] == target) {
-                    return {i, j};
-                }
-            }
+    vector<int> arrayRankTransform(vector<int>& arr) {
+        unordered_map<int, int> m;
+        vector<int> arr2(arr);
+        sort(arr2.begin(), arr2.end());
+        int cnt = 1;
+        for (int i = 0; i < arr2.size()  ; i++) {
+            if (i!=0 && arr2[i] == arr2[i - 1])
+                continue;
+            m.insert(pair<int, int>(arr2[i], cnt));
+            cnt++;
         }
-    }
-    /*
-     * 哈希表
-     */
-    vector<int> twoSum_2(vector<int>& nums, int target) {
-        unordered_map<int, int> hashTable;
-        for (int i = 0; i < nums.size(); i++) {
-            auto it = hashTable.find(target - nums[i]);
-            if (it != hashTable.end()) {
-                return {it->second, i};
-            }
-            hashTable[nums[i]] = i;
+        for (int i = 0; i < arr2.size(); i++) {
+            arr[i] = m[arr[i]];
         }
-        return {};
+        return arr;
     }
 };
+
 int main(int argc, char* argv[]) {
+    Solution s;
+    vector<int> arr = { 37,12,28,9,100,56,80,5,12 };
+    vector<int> ans = s.arrayRankTransform(arr);
+    for (auto num : ans) {
+        cout << num << "\t";
+    }
     return 0;
 }

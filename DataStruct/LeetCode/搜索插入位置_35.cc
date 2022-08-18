@@ -40,33 +40,27 @@ struct TreeNode {
 
 class Solution {
    public:
-    /*
-     * 低效的二重循环
-     */
-    vector<int> twoSum(vector<int>& nums, int target) {
-        for (int i = 0; i < nums.max_size(); i++) {
-            for (int j = i; j < nums.max_size(); j++) {
-                if (nums[i] + nums[j] == target) {
-                    return {i, j};
-                }
+    int searchInsert(vector<int>& nums, int target) {
+        int pos = 0, idx = 0;
+        if (nums[0] == target)
+            return 0;
+        for (int i = 1; i < nums.size(); i++) {
+            cout << (nums[i] < target) ? "true\n" : "false\n";
+            if (nums[i] == target) {
+                return i;
+            } else if (nums[i] < target) {
+                pos = i + 1;
             }
         }
-    }
-    /*
-     * 哈希表
-     */
-    vector<int> twoSum_2(vector<int>& nums, int target) {
-        unordered_map<int, int> hashTable;
-        for (int i = 0; i < nums.size(); i++) {
-            auto it = hashTable.find(target - nums[i]);
-            if (it != hashTable.end()) {
-                return {it->second, i};
-            }
-            hashTable[nums[i]] = i;
-        }
-        return {};
+        return pos;
     }
 };
+
 int main(int argc, char* argv[]) {
+    Solution s;
+    vector<int> nums = {1, 3, 5, 6};
+    // cout << s.searchInsert(nums, 5) << endl;
+    cout << s.searchInsert(nums, 2) << endl;
+    // cout << s.searchInsert(nums, 7) << endl;
     return 0;
 }

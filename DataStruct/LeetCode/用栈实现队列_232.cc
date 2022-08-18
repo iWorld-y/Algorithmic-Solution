@@ -12,6 +12,7 @@
 #include <set>
 #include <stack>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -28,6 +29,12 @@ typedef double fl;
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a < b ? a : b)
 
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -38,35 +45,42 @@ struct TreeNode {
         : val(x), left(left), right(right) {}
 };
 
-class Solution {
+class MyQueue {
+   private:
+    stack<int> in;
+    stack<int> out;
+    int front;
+
    public:
-    /*
-     * 低效的二重循环
-     */
-    vector<int> twoSum(vector<int>& nums, int target) {
-        for (int i = 0; i < nums.max_size(); i++) {
-            for (int j = i; j < nums.max_size(); j++) {
-                if (nums[i] + nums[j] == target) {
-                    return {i, j};
-                }
+    MyQueue() {}
+
+    void push(int x) {
+        if (this->in.empty())
+            this->front = x;
+        this->in.push(x);
+    }
+
+    int pop() {
+        if (this->out.empty()) {
+            while (this->in.size() != 0) {
+                this->out.push(this->in.top());
+                this->in.pop();
             }
         }
+        int ans = this->out.top();
+        this->out.pop();
+        return ans;
     }
-    /*
-     * 哈希表
-     */
-    vector<int> twoSum_2(vector<int>& nums, int target) {
-        unordered_map<int, int> hashTable;
-        for (int i = 0; i < nums.size(); i++) {
-            auto it = hashTable.find(target - nums[i]);
-            if (it != hashTable.end()) {
-                return {it->second, i};
-            }
-            hashTable[nums[i]] = i;
-        }
-        return {};
+
+    int peek() {
+        if (this->out.size() != 0)
+            return this->out.top();
+        return this->front;
     }
+
+    bool empty() { return this->in.empty() && this->out.empty(); }
 };
+
 int main(int argc, char* argv[]) {
     return 0;
 }

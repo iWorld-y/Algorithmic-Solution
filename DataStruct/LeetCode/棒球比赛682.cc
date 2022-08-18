@@ -40,33 +40,31 @@ struct TreeNode {
 
 class Solution {
    public:
-    /*
-     * 低效的二重循环
-     */
-    vector<int> twoSum(vector<int>& nums, int target) {
-        for (int i = 0; i < nums.max_size(); i++) {
-            for (int j = i; j < nums.max_size(); j++) {
-                if (nums[i] + nums[j] == target) {
-                    return {i, j};
-                }
+    int calPoints(vector<string>& ops) {
+        int ans = 0;
+        vector<int> v;
+        for (int i = 0; i < ops.size(); i++) {
+            if (ops[i][0] == 'C') {
+                v.pop_back();
+            } else if (ops[i][0] == 'D') {
+                v.push_back(v[v.size() - 1] * 2);
+            } else if (ops[i][0] == '+') {
+                v.push_back(v[v.size() - 1] + v[v.size() - 2]);
+            } else {
+                v.push_back(stoi(ops[i]));
             }
         }
-    }
-    /*
-     * 哈希表
-     */
-    vector<int> twoSum_2(vector<int>& nums, int target) {
-        unordered_map<int, int> hashTable;
-        for (int i = 0; i < nums.size(); i++) {
-            auto it = hashTable.find(target - nums[i]);
-            if (it != hashTable.end()) {
-                return {it->second, i};
-            }
-            hashTable[nums[i]] = i;
+        for (int i = 0; i < v.size(); i++) {
+            ans += v[i];
         }
-        return {};
+        return ans;
     }
 };
+
 int main(int argc, char* argv[]) {
+    // vector<string> str = {"5", "-2", "4", "C", "D", "9", "+", "+"};
+    vector<string> str = {"1", "C", "-62", "-45", "-68"};
+    Solution s;
+    cout << s.calPoints(str);
     return 0;
 }

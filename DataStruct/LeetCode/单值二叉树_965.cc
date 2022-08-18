@@ -40,33 +40,16 @@ struct TreeNode {
 
 class Solution {
    public:
-    /*
-     * 低效的二重循环
-     */
-    vector<int> twoSum(vector<int>& nums, int target) {
-        for (int i = 0; i < nums.max_size(); i++) {
-            for (int j = i; j < nums.max_size(); j++) {
-                if (nums[i] + nums[j] == target) {
-                    return {i, j};
-                }
-            }
-        }
-    }
-    /*
-     * 哈希表
-     */
-    vector<int> twoSum_2(vector<int>& nums, int target) {
-        unordered_map<int, int> hashTable;
-        for (int i = 0; i < nums.size(); i++) {
-            auto it = hashTable.find(target - nums[i]);
-            if (it != hashTable.end()) {
-                return {it->second, i};
-            }
-            hashTable[nums[i]] = i;
-        }
-        return {};
+    bool isUnivalTree(TreeNode* root) { return dfs(root, root->val); }
+    bool dfs(TreeNode* root, int val) {
+        if (!root)
+            return true;
+        if (root->val != val)
+            return false;
+        return dfs(root->left, val) && dfs(root->right, val);
     }
 };
+
 int main(int argc, char* argv[]) {
     return 0;
 }

@@ -12,9 +12,12 @@
 #include <set>
 #include <stack>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
+
+// @lc app=leetcode.cn id=94 lang=cpp
 
 const int MAXN = 0xffff;
 const int INF = 0x3f3f3f3f;
@@ -28,6 +31,12 @@ typedef double fl;
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a < b ? a : b)
 
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -39,34 +48,20 @@ struct TreeNode {
 };
 
 class Solution {
+   private:
+    vector<int> ans;
+
    public:
-    /*
-     * 低效的二重循环
-     */
-    vector<int> twoSum(vector<int>& nums, int target) {
-        for (int i = 0; i < nums.max_size(); i++) {
-            for (int j = i; j < nums.max_size(); j++) {
-                if (nums[i] + nums[j] == target) {
-                    return {i, j};
-                }
-            }
+    vector<int> inorderTraversal(TreeNode* root) {
+        if (root != NULL) {
+            inorderTraversal(root->left);
+            ans.push_back(root->val);
+            inorderTraversal(root->right);
         }
-    }
-    /*
-     * 哈希表
-     */
-    vector<int> twoSum_2(vector<int>& nums, int target) {
-        unordered_map<int, int> hashTable;
-        for (int i = 0; i < nums.size(); i++) {
-            auto it = hashTable.find(target - nums[i]);
-            if (it != hashTable.end()) {
-                return {it->second, i};
-            }
-            hashTable[nums[i]] = i;
-        }
-        return {};
+        return ans;
     }
 };
+
 int main(int argc, char* argv[]) {
     return 0;
 }
