@@ -52,11 +52,11 @@ class Solution {
    public:
     bool isOneBitCharacter(vector<int>& bits) {
         int i = 0;
-        for (; i < bits.size() - 1;) {
-            if (bits[i] == 1) i++;
-            i++;
+        int n = bits.size();
+        while (i < n - 1) {
+            i += bits[i] + 1;
         }
-        return bits[i] == 0;
+        return i == n - 1;
     }
 };
 // @lc code=end
