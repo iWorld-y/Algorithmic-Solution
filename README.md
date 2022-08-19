@@ -13,4 +13,5 @@ LeetCode主页: [iWrold - 力扣（LeetCode） (leetcode-cn.com)](https://leetco
 | 日期           | 进度                                                         |
 | -------------- | ------------------------------------------------------------ |
 | 2021年11月22日 | [LeetBook 初级算法](https://leetcode-cn.com/leetbook/detail/top-interview-questions-easy/) 第四章 树 5/5 |
+| 2022年8月19日  | [LeetBook 初级算法](https://leetcode-cn.com/leetbook/detail/top-interview-questions-easy/) 第五章 排序和搜索 2/2 |
 
