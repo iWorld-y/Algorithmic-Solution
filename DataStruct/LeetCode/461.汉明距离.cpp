@@ -50,10 +50,16 @@ struct TreeNode {
 // @lc code=start
 class Solution {
    public:
+   /*
+     s =            1001 1000
+     s - 1 =        1001 0111
+     s & (s - 1) =  1001 0000
+     即消除最后一个 1 .
+   */
     int hammingDistance(int x, int y) {
         int s = x ^ y, ans = 0;
         while (s) {
-            s &= s - 1;
+            s = (s & (s - 1));
             ans++;
         }
         return ans;
