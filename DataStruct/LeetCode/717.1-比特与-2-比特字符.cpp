@@ -47,7 +47,23 @@ struct TreeNode {
         : val(x), left(left), right(right) {}
 };
 
+// @lc code=start
+class Solution {
+   public:
+    bool isOneBitCharacter(vector<int>& bits) {
+        int i = 0;
+        for (; i < bits.size() - 1;) {
+            if (bits[i] == 1) i++;
+            i++;
+        }
+        return bits[i] == 0;
+    }
+};
+// @lc code=end
+
 int main(int argc, char* argv[]) {
-    
+    vector<int> arr = {1};
+    Solution s;
+    cout << s.isOneBitCharacter(arr);
     return 0;
 }
