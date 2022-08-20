@@ -57,8 +57,9 @@ class MinStack {
     MinStack() { minNum.push(INT_MAX); }
 
     void push(int val) {
-        s.push(val);
+        // 每一次都存入当前栈中的最小值, 哪怕有重复
         minNum.push(min(minNum.top(), val));
+        s.push(val);
     }
 
     void pop() {
