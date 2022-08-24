@@ -47,14 +47,19 @@ struct TreeNode {
         : val(x), left(left), right(right) {}
 };
 
-int main(int argc, char* argv[]) {
-    unordered_map<int, int> m;
-    m.insert(pair<int, int>(1, 2));
-    m.insert(pair<int, int>(11, 21));
-    m.insert(pair<int, int>(22, 22));
-    cout << m[1] << endl;
-    cout << m[11] << endl;
-    cout << m[22] << endl;
-    cout << m[33] << endl;
-    return 0;
-}
+// @lc code=start
+class Solution {
+   public:
+    bool canBeEqual(vector<int>& target, vector<int>& arr) {
+        if (target.size() != arr.size()) return false;
+        sort(target.begin(), target.end());
+        sort(arr.begin(), arr.end());
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr[i] != target[i]) return false;
+        }
+        return true;
+    }
+};
+// @lc code=end
+
+int main(int argc, char* argv[]) { return 0; }
