@@ -68,7 +68,6 @@ class Solution {
         } else if (root->left == NULL && root->right == NULL) {
             return num * 10 + root->val;
         } else {
-            cout << num << endl;
             return solve(root->left, num * 10 + root->val) +
                    solve(root->right, num * 10 + root->val);
         }
