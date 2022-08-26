@@ -50,16 +50,42 @@ struct TreeNode {
 // @lc code=start
 class Solution {
    public:
+    /*
+     * O(n)
+     */
     int maxProduct(vector<int>& nums) {
-        int ans = INT16_MIN;
+        int a = nums[0], b = nums[1];
         int len = nums.size();
-        for (int i = 0; i < len; i++) {
-            for (int j = i + 1; j < len; j++) {
-                ans = max(ans, (nums[i] - 1) * (nums[j] - 1));
-            }
+        if (a < b) swap(a, b);
+        for (int i = 2; i < len; i++) {
+            if (a < nums[i]) {
+                swap(a, b);
+                a = nums[i];
+            } else if (b < nums[i])
+                b = nums[i];
         }
-        return ans;
+        return (a - 1) * (b - 1);
     }
+    /*
+     * O(nlog(n))
+     */
+    // int maxProduct(vector<int>& nums) {
+    //     sort(nums.begin(), nums.end());
+    //     return (nums[0] - 1) * (nums[1] - 1);
+    // }
+    /*
+     * O(n^2)
+     */
+    // int maxProduct(vector<int>& nums) {
+    //     int ans = INT16_MIN;
+    //     int len = nums.size();
+    //     for (int i = 0; i < len; i++) {
+    //         for (int j = i + 1; j < len; j++) {
+    //             ans = max(ans, (nums[i] - 1) * (nums[j] - 1));
+    //         }
+    //     }
+    //     return ans;
+    // }
 };
 // @lc code=end
 
