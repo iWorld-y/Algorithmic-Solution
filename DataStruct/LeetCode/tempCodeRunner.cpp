@@ -62,26 +62,43 @@ struct TreeNode {
  */
 class Solution {
    public:
-    int solve(TreeNode* root, int num) {
-        if (root == NULL) {
-            return 0;
-        } else if (root->left == NULL && root->right == NULL) {
-            return num * 10 + root->val;
-        } else {
-            cout << num << endl;
-            return solve(root->left, num * 10 + root->val) +
-                   solve(root->right, num * 10 + root->val);
+    typedef struct {
+        TreeNode* node;
+        int val;
+    } TNode;
+
+    int widthOfBinaryTree(TreeNode* root) {
+        if (root == NULL) return 0;
+        int ans = 0;
+        queue<TreeNode*> q;
+        q.push(root);
+        while (!q.empty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode* node = q.front();
+                q.pop();
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
+                if ((node->left == NULL && node->right) ||
+                    (node->left && node->right == NULL))
+                    size++;
+            }
+            ans = max(ans, size);
         }
+        return ans;
     }
-    int sumNumbers(TreeNode* root) { return solve(root, 0); }
 };
 // @lc code=end
 
 int main(int argc, char* argv[]) {
     Solution s;
-    TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    cout << s.sumNumbers(root);
+    TreeNode* root = new TreeNode(3);
+    root->left = new TreeNode(9);
+    root->left->right = new TreeNode(9);
+    root->left->left = new TreeNode(9);
+    root->right = new TreeNode(20);
+    root->right->left = new TreeNode(15);
+    root->right->right = new TreeNode(7);
+    cout << s.widthOfBinaryTree(root);
     return 0;
 }
