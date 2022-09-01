@@ -51,10 +51,12 @@ struct TreeNode {
 class Solution {
    public:
     vector<int> finalPrices(vector<int>& prices) {
-        for (int i = 0; i < prices.size(); i++) {
-            for (int j = i + 1; j < prices.size(); j++) {
+        int len = prices.size();
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
                 if (prices[i] >= prices[j]) {
                     prices[i] -= prices[j];
+                    break;
                 }
             }
         }
