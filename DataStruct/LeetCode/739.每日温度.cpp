@@ -50,25 +50,28 @@ struct TreeNode {
 // @lc code=start
 class Solution {
    public:
-    vector<int> finalPrices(vector<int>& prices) {
-        int len = prices.size();
-        for (int i = 0; i < len; i++) {
-            for (int j = i + 1; j < len; j++) {
-                if (prices[i] >= prices[j]) {
-                    prices[i] -= prices[j];
-                    break;
-                }
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        int n = temperatures.size();
+        vector<int> ans(n), next(101, INT_MAX);
+        for (int i = n - 1; i >= 0; --i) {
+            int warmerIndex = INT_MAX;
+            for (int t = temperatures[i] + 1; t <= 100; ++t) {
+                warmerIndex = min(warmerIndex, next[t]);
             }
+            if (warmerIndex != INT_MAX) {
+                ans[i] = warmerIndex - i;
+            }
+            next[temperatures[i]] = i;
         }
-        return prices;
+        return ans;
     }
 };
 // @lc code=end
 
 int main(int argc, char* argv[]) {
-    vector<int> arr = {8, 4, 6, 2, 3};
+    vector<int> temperature = {73, 74, 75, 71, 69, 72, 76, 73};
     Solution s;
-    for (auto num : s.finalPrices(arr)) {
+    for (auto num : s.dailyTemperatures(temperature)) {
         cout << num << endl;
     }
     return 0;

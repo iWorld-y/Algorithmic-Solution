@@ -51,12 +51,10 @@ struct TreeNode {
 class Solution {
    public:
     vector<int> finalPrices(vector<int>& prices) {
-        int len = prices.size();
-        for (int i = 0; i < len; i++) {
-            for (int j = i + 1; j < len; j++) {
+        for (int i = 0; i < prices.size(); i++) {
+            for (int j = i + 1; j < prices.size(); j++) {
                 if (prices[i] >= prices[j]) {
                     prices[i] -= prices[j];
-                    break;
                 }
             }
         }
@@ -65,11 +63,4 @@ class Solution {
 };
 // @lc code=end
 
-int main(int argc, char* argv[]) {
-    vector<int> arr = {8, 4, 6, 2, 3};
-    Solution s;
-    for (auto num : s.finalPrices(arr)) {
-        cout << num << endl;
-    }
-    return 0;
-}
+int main(int argc, char* argv[]) { return 0; }
