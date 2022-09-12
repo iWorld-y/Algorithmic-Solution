@@ -1,4 +1,4 @@
-package 力扣;
+package MyTools;
 
 public class ListNode {
     int val;
