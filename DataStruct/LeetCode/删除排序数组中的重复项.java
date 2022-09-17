@@ -1,6 +1,4 @@
-package 力扣;
-
-import java.util.*;
+package leetcode;
 
 public class 删除排序数组中的重复项 {
     public static void main(String[] args) {

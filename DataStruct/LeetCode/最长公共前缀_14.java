@@ -1,7 +1,4 @@
-package 力扣;
-
-import java.util.ArrayList;
-import java.util.List;
+package leetcode;
 
 public class 最长公共前缀_14 {
     public static void main(String[] args) {

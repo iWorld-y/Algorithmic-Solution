@@ -1,4 +1,4 @@
-package MyTools;
+package leetcode.MyTools;
 
 public class TreeNode {
     int val;

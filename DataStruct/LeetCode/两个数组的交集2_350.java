@@ -1,8 +1,6 @@
-package 力扣;
+package leetcode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class 两个数组的交集2_350 {
     public static void main(String[] args) {

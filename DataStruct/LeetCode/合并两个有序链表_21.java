@@ -1,4 +1,4 @@
-package 力扣;
+package leetcode;
 
 public class 合并两个有序链表_21 {
 }

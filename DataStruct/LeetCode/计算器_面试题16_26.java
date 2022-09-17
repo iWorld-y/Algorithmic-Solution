@@ -1,4 +1,4 @@
-package 力扣;
+package leetcode;
 
 import java.util.*;
 

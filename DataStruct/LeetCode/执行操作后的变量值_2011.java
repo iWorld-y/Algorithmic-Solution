@@ -1,6 +1,4 @@
-package 力扣;
-
-import java.util.*;
+package leetcode;
 
 public class 执行操作后的变量值_2011 {
     public static void main(String[] args) {

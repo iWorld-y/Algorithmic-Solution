@@ -1,8 +1,4 @@
-package 力扣;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+package leetcode;
 
 public class 猜数字游戏_299 {
     public static void main(String[] args) {

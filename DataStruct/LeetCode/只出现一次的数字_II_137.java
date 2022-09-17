@@ -1,4 +1,4 @@
-package 力扣;
+package leetcode;
 
 public class 只出现一次的数字_II_137 {
     public static void main(String[] args) {

@@ -1,6 +1,4 @@
-package 力扣;
-
-import java.util.*;
+package leetcode;
 
 public class 加一_66 {
 }

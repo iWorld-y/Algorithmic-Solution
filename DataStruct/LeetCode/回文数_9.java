@@ -1,7 +1,4 @@
-package 力扣;
-
-import java.util.Arrays;
-import java.util.List;
+package leetcode;
 
 public class 回文数_9 {
     public static void main(String[] args) {

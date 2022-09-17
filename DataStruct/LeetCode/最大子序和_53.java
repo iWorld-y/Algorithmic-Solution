@@ -1,4 +1,4 @@
-package 力扣;
+package leetcode;
 
 public class 最大子序和_53 {
     public static void main(String[] args) {

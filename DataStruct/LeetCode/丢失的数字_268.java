@@ -1,6 +1,4 @@
-package 力扣;
-
-import java.util.Arrays;
+package leetcode;
 
 public class 丢失的数字_268 {
 }

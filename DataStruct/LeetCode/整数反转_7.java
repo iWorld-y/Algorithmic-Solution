@@ -1,4 +1,4 @@
-package 力扣;
+package leetcode;
 
 public class 整数反转_7 {
     public static void main(String[] args) {

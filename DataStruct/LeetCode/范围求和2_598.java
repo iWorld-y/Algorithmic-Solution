@@ -1,6 +1,4 @@
-package 力扣;
-
-import java.util.*;
+package leetcode;
 
 public class 范围求和2_598 {
     public static void main(String[] args) {

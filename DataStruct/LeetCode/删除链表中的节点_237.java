@@ -1,4 +1,4 @@
-package 力扣;
+package leetcode;
 
 public class 删除链表中的节点_237 {
 }
