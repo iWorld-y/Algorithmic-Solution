@@ -1,9 +1,7 @@
-import java.util.Arrays;
-
 /*
- * @lc app=leetcode.cn id=1608 lang=java
+ * @lc app=leetcode.cn id=812 lang=java
  *
- * [1608] 特殊数组的特征值
+ * [812] 最大三角形面积
  */
 
 // @lc code=start
@@ -37,13 +35,4 @@ class Solution {
         return ans;
     }
 }
-
-public class Main {
-    public static void main(String[] args) {
-        Solution s = new Solution();
-        System.out.println(s.largestTriangleArea(new int[][]{{1, 1}, {1, 3}, {3, 1}, {3, 3}, {2, 2}}));
-        System.out.println("\n\n\n" + s.largestTriangleArea(new int[][]{
-                {-35, 19}, {40, 19}, {27, -20}, {35, -3}, {44, 20}, {22, -21}, {35, 33}, {-19, 42}, {11, 47}, {11, 37}
-        }));
-    }
-}
+// @lc code=end
