@@ -1,18 +1,22 @@
 package LeetCode
 
-import "fmt"
-
 // DSU Disjoint_Set_Union
 type DSU struct {
-	pa []int
+	pa   []int
+	size []int
 }
 
-func NewDSU(size int) *DSU {
-	pa := make([]int, size)
-	for i := 0; i < size; i++ {
+func NewDSU(length int) *DSU {
+	pa := make([]int, length)
+	size := make([]int, length)
+	for i := 0; i < length; i++ {
 		pa[i] = i
+		size[i] = i
 	}
-	return &DSU{pa: pa}
+	return &DSU{
+		pa:   pa,
+		size: size,
+	}
 }
 
 // Find 给出 x 所属的集合
@@ -27,7 +31,18 @@ func (d *DSU) Find(x int) int {
 
 // Union 把 x 所属集合并入 y 所属集合
 func (d *DSU) Union(x, y int) {
-	d.pa[d.Find(x)] = d.Find(y)
+	x, y = d.Find(x), d.Find(y)
+	if x == y {
+		return
+	}
+
+	// 若 x 的深度小一些
+	if d.size[x] < d.size[y] {
+		x, y = y, x
+	}
+	// 把 y 合入 x 中
+	d.pa[y] = x
+	d.size[x] += d.size[y]
 }
 
 func findCircleNum(isConnected [][]int) int {
@@ -35,7 +50,6 @@ func findCircleNum(isConnected [][]int) int {
 	for a, cities := range isConnected {
 		for b, city := range cities {
 			if city != 0 && a != b {
-				fmt.Println(a, "\t->\t", b)
 				dsu.Union(a, b)
 			}
 		}
