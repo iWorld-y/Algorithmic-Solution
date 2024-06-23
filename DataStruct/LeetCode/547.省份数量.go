@@ -18,10 +18,11 @@ func NewDSU(size int) *DSU {
 // Find 给出 x 所属的集合
 func (d *DSU) Find(x int) int {
 	// 若 x 的父节点指向自身, 即 x 为当前集合的代表元素
-	if d.pa[x] == x {
-		return x
+	if d.pa[x] != x {
+		// 路径压缩, 让 x 直接指向根节点
+		d.pa[x] = d.Find(d.pa[x])
 	}
-	return d.Find(d.pa[x])
+	return d.pa[x]
 }
 
 // Union 把 x 所属集合并入 y 所属集合
@@ -41,7 +42,7 @@ func findCircleNum(isConnected [][]int) int {
 	}
 	set := make(map[int]struct{})
 	for _, v := range dsu.pa {
-		set[v] = struct{}{}
+		set[dsu.Find(v)] = struct{}{}
 	}
 	return len(set)
 }
