@@ -36,11 +36,11 @@ func (d *DSU) Union(x, y int) {
 		return
 	}
 
-	// 若 x 的深度小一些
+	// 让 y 代表深度小的那棵树
 	if d.size[x] < d.size[y] {
 		x, y = y, x
 	}
-	// 把 y 合入 x 中
+	// 把更小的树合入更大的树中
 	d.pa[y] = x
 	d.size[x] += d.size[y]
 }
