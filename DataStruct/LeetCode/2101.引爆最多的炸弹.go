@@ -1,5 +1,10 @@
 package LeetCode
 
+import (
+	"fmt"
+	"math"
+)
+
 type DSU_ struct {
 	root []int
 	size []int
@@ -24,6 +29,7 @@ func (d *DSU_) Find(x int) int {
 	}
 	return d.root[x]
 }
+
 func (d *DSU_) Union(x, y int) {
 	rootX, rootY := d.Find(x), d.Find(y)
 	if rootX != rootY {
@@ -34,6 +40,7 @@ func (d *DSU_) Union(x, y int) {
 		d.size[rootX] += d.size[rootY]
 	}
 }
+
 func maximumDetonation(bombs [][]int) int {
 	if len(bombs) <= 1 {
 		return len(bombs)
@@ -42,6 +49,7 @@ func maximumDetonation(bombs [][]int) int {
 	for i := 0; i < len(bombs); i++ {
 		for j := i + 1; j < len(bombs); j++ {
 			if isSame(bombs[i], bombs[j]) {
+				fmt.Printf("%v\t%v\t%f\n", bombs[i], bombs[j], math.Sqrt(float64(distanceSquared(bombs[i][0], bombs[i][1], bombs[j][0], bombs[j][1]))))
 				dsu.Union(i, j)
 			}
 		}
@@ -61,5 +69,5 @@ func distanceSquared(x1, y1, x2, y2 int) int {
 
 func isSame(x, y []int) bool {
 	dist := distanceSquared(x[0], x[1], y[0], y[1])
-	return dist <= x[2]*x[2] || dist <= y[2]*x[2]
+	return dist <= x[2]*x[2] || dist <= y[2]*y[2]
 }
