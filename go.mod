@@ -1,3 +1,3 @@
-module Algorithmic-Solution
+module github.com/iWorld-y/Algorithmic-Solution
 
-go 1.22.1
+go 1.19
