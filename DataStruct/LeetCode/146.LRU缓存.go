@@ -31,27 +31,40 @@ func (l *DList[T]) Insert(key, val T) *DList[T] {
 		l.tail = node
 	} else {
 		if l.len >= l.cap {
+			l.tail.key = key
 			l.tail.val = val
+			l.MoveToFront(l.tail)
 			return l
 		}
-		l.tail.next = node
-		node.prev = l.tail
-		l.tail = node
+		l.head.prev = node
+		node.next = l.head
+		l.head = node
 	}
 	l.len++
 	return l
 }
 
 func (l *DList[T]) MoveToFront(node *Node[T]) *DList[T] {
-	if node.prev != nil {
+	if node.prev != nil && node.next != nil {
 		node.prev.next = node.next
-	}
-	if node.next != nil {
 		node.next.prev = node.prev
+
+		node.prev = nil
+		node.next = l.head
+		l.head.prev = node
+		l.head = node
+		return l
 	}
+	if node.prev == nil {
+		return l
+	}
+
+	l.tail = l.tail.prev
+	l.tail.next = nil
 	l.head.prev = node
 	node.next = l.head
 	l.head = node
+	l.head.prev = nil
 	return l
 }
 
