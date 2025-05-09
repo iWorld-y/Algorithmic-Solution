@@ -8,7 +8,7 @@ package LeetCode
 
 // @lc code=start
 func lemonadeChange(bills []int) bool {
-	var cnt5, cnt10, cnt20 uint32 = 0, 0, 0
+	var cnt5, cnt10 uint32 = 0, 0
 	for _, v := range bills {
 		switch v {
 		case 5:
@@ -21,7 +21,6 @@ func lemonadeChange(bills []int) bool {
 				return false
 			}
 		case 20:
-			cnt20++
 			if cnt10 > 0 {
 				if cnt5 <= 0 {
 					return false
